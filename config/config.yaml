@@ -1,0 +1,7 @@
+- Camera Config:
+    Camera Name: Logitech C270
+    Field of View: 55
+    Focal Length: 30
+    Sensor Height: null
+  model: model-f6b98070.onnx
+  model path: D:\Desktop\DepthEstimator\models
