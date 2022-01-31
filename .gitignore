@@ -1,8 +1,4 @@
-/models/*
 
 /models/model-f6b98070.onnx
 /models/model-small.onnx
 
-models/model-f6b98070.onnx
-models/model-small.onnx
-*.onx 
