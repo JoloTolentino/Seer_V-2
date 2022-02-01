@@ -1,3 +1,11 @@
+## Author          : Jolo Tolentino
+## Project Name    : SEER-V2
+## Project Started : January 25,2022
+
+
+
+## Run config.py to Setup Library for SEER-V2
+
 import os
 from pyexpat import model 
 import yaml 
