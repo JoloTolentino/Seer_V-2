@@ -11,3 +11,10 @@
 #### 5. Models Folder with Corresponding Models
 
 
+Project Update 
+- [x] Calibration Testing
+- [x] Calibration Module
+- [x] Configuration Module
+- [] Depth Estimation Module
+- [] Object Detection Module
+- [] Pose Estiamtion Module
