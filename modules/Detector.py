@@ -41,8 +41,10 @@ class Detector:
 
     def Detect(self,data):
         
-        #Blob from Image preprocesses input data
-        self.BLOB = cv2.dnn.blobFromImage(data,self.Image_Scale_Factor,self.Image_Size)
+        #Blob from Image preprocesses input data (mean subtraction, normalizing(Image Scale Factor), OPTIONAL (Channel Swapping))
+        self.BLOB = cv2.dnn.blobFromImage(data,self.Image_Scale_Factor,self.Image_Size,swapRB = True)
+        
+        self.Yolo_Model.setInput(self.BLOB)
 
 
 
