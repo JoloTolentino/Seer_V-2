@@ -1,6 +1,6 @@
 # SEER - V2
 
-## Assistive Blind Aid through Monocular Depth Estimation, Object Detection and Object Pose Estimation
+ Assistive Blind Aid through Monocular Depth Estimation, Object Detection and Object Pose Estimation
 
 
 ### Python Dependencies 
