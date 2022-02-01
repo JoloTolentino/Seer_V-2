@@ -18,16 +18,18 @@ class Detector:
         CFG_File = open(str(os.path.dirname(os.getcwd()+'\config\config.yaml')))
         Parsed_CFG = yaml.load(CFG_File,Loader=yaml.FullLoader)
 
-        #Load Yolo Model
+        #Load Yolo Model Configurations from CFG file
         Yolo_Model_CFG = Parsed_CFG['Yolo CFG']
         Yolo_Model_Weights = Parsed_CFG['Yolo Weights']
         Yolo_Model_Names = Parsed_CFG['Yolo Names']
 
         #Scaling 
-        self.Image_Scale = Parsed_CFG["Image Scale"]
+        self.Image_Scale_Factor = Parsed_CFG["Image Scale"]
+        self.Image_Size = Parsed_CFG['Image Size']
 
-
+        #Load Model onto memory using OpenCV
         self.Yolo_Model = cv2.dnn.readNetFromDarknet(Yolo_Model_CFG,Yolo_Model_Weights)
+
 
         if self.Yolo_Model:
             print("Object Detection Model Loaded")
@@ -38,7 +40,9 @@ class Detector:
 
 
     def Detect(self,data):
-        self.BLOB = cv2.dnn.blobFromImage(data,)
+        
+        #Blob from Image preprocesses input data
+        self.BLOB = cv2.dnn.blobFromImage(data,self.Image_Scale_Factor,self.Image_Size)
 
 
 
