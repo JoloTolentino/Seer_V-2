@@ -47,6 +47,8 @@ class Detector:
 
 
 
+
+
     def Detect(self,data, draw = False):
         
         # STORAGE VARIABLES Initialize every Use when detecting
@@ -82,8 +84,6 @@ class Detector:
             
 
     def OverLay(self,Yolo_Video_Feed):
-
-
         try:
             for i in self.Indexes.flatten():
                 (x, y) = (self.Boxes[i][0],self.Boxes[i][1])
@@ -101,6 +101,10 @@ class Detector:
 
 
     def Find(self,target):
+
+        
+
+        se
         pass
 
 

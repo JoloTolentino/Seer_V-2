@@ -10,9 +10,14 @@
 
 
 import mediapipe as mp 
+import cv2 
 
 
 
 class AngleOrientation:
-    def__init__(self):
+    def __init__(self):
+        pass
+
     
+
+

@@ -1,7 +1,8 @@
-# SeeR - V2
+# SEER - V2
 
  Assistive Blind Aid through Monocular Depth Estimation, Object Detection and Object Pose Estimation.
  Estimating Spatial Perception through Computer Vision to Aid the Visually Impaired for Day to Day Interaction
+
 
 
 ### Python Dependencies 
@@ -11,6 +12,11 @@
 ##### 4. Yaml
 ##### 5. Models Folder with Corresponding Models
 
+### JavaScript Dependeencies
+
+
+
+
 
 ### Project Update 
 - [x] Calibration Testing
@@ -19,3 +25,4 @@
 - Depth Estimation Module
 - Object Detection Module
 - Pose Estiamtion Module
+- Cliet-Server Module
