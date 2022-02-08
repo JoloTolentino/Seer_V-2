@@ -4,8 +4,15 @@
 
 
 
-### Detecor.py uses the YOLO object detection model by default but can be changed
+### We use Pose Estimation to understand angle orientation of Objects, with Google's Objectron dataset 
+### We recognize angle orientation of desired Target Objects
 
 
 
-import mediapipe
+import mediapipe as mp 
+
+
+
+class AngleOrientation:
+    def__init__(self):
+    

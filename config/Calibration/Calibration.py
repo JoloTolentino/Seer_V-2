@@ -4,7 +4,7 @@ import tkinter
 import math 
 
 
-# KnownHeight = 138.5
+KnownHeight = 138.5
 # KnownWidth = 136.7
 # KnownPixelHeight = 226
 # KnownHeight = 111.500
@@ -13,7 +13,7 @@ import math
 # KnownPixelHeight = 297
 
 
-KnownHeight = 98.0
+# KnownHeight = 98.0
 # KnownPixelHeight = 195
 # # KnownDistance = 500
 # KnownDistance = 400
