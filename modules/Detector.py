@@ -43,9 +43,6 @@ class Detector:
 
 
 
-
-
-
     def Detect(self,data, draw = False):
         
         # STORAGE VARIABLES Initialize every Use when detecting

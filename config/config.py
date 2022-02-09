@@ -24,25 +24,12 @@ default_config_file = [
             "Field of View" : 55,
             "Sensor Height" : None, 
         },
-        # DETECTOR CONFIG
         "Yolo CFG":BaseDir+"\data\Yolo.cfg",
         "Yolo Weights": BaseDir+"\models\Yolo.weights",
         "Yolo Labels": BaseDir+"\data\coco.names",
-        # "Image Scale": 
-        
-
-
-
-        
 
     }
 ]
-
-
-
-
-
-
 
 
 Known_Heights = [
