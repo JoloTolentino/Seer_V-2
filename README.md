@@ -10,7 +10,9 @@
 ##### 2. MediaPipe 
 ##### 3. Numpy 
 ##### 4. Yaml
-##### 5. Models Folder with Corresponding Models
+##### 5. Yaml
+##### 6. Models Folder with Corresponding Models
+
 
 ### JavaScript Dependeencies
 

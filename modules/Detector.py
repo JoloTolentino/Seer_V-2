@@ -24,18 +24,18 @@ class Detector:
         Yolo_Model_Weights = Parsed_CFG['Yolo Weights']
         Yolo_Model_Names = Parsed_CFG['Yolo Names']
         self.Yolo_Labels = Parsed_CFG['Yolo Labels']
+        self.Yolo_Labels_Indexing = {label:index for index,label in self.Yolo_Labels} #Reverse Dict
 
         ##
         self.Thresh = threshold
 
-        #Scaling 
+        #Scaling [Since Yolo converts the dimensions of the input Data we need to Calibrate it] 
         self.Image_Scale_Factor = Parsed_CFG["Image Scale"]
         self.Image_Size = Parsed_CFG['Image Size']
 
         #Load Model onto memory using OpenCV
         self.Yolo_Model = cv2.dnn.readNetFromDarknet(Yolo_Model_CFG,Yolo_Model_Weights)
 
-    
 
         if self.Yolo_Model:
             print("Object Detection Model Loaded")
@@ -101,10 +101,28 @@ class Detector:
 
 
     def Find(self,target):
+        Target_Index = self.Yolo_Labels_Indexing[target] 
+        if Target_Index in self.Classification_ID:
+            Indexes = np.where(np.array(self.Classification_ID) == Target_Index)[0] ##an array of indexes
+
+            
+
+
+
+
+
+
+            
+
+
+            
+
+
+
 
         
-
-        se
+        
+        # return Coordinates
         pass
 
 
