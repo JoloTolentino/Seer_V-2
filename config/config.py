@@ -7,23 +7,41 @@
 ## Run config.py to Setup Library for SEER-V2
 
 import os
-from pyexpat import model 
+
 import yaml 
 import argparse
+
+
+BaseDir =  str(os.path.dirname(os.getcwd()))
 
 default_config_file = [
     {
         "model": "model-f6b98070.onnx",
-        "model path":  str(os.path.dirname(os.getcwd()))+"\models",
+        "model path":  BaseDir+"\models",
         "Camera Config": {
             "Camera Name": "Logitech C270",
             "Focal Length": 30,
             "Field of View" : 55,
             "Sensor Height" : None, 
         },
+        # DETECTOR CONFIG
+        "Yolo CFG":BaseDir+"\data\Yolo.cfg",
+        "Yolo Weights": BaseDir+"\models\Yolo.weights",
+        "Yolo Labels": BaseDir+"\data\coco.names",
+        # "Image Scale": 
+        
+
+
+
+        
 
     }
 ]
+
+
+
+
+
 
 
 
@@ -42,7 +60,7 @@ args = argparse.ArgumentParser(description="Settings Configurations for SEER V2 
 args.add_argument("--model",type=str,required=False)
 args.add_argument("--FOV",type=int,required=False)
 args.add_argument("--FocalLength",type=int,required=False)
-args.add_argument("--SensorHeight", type = int, required = True)
+# args.add_argument("--SensorHeight", type = int, required = True)
 
 args = args.parse_args()
 
@@ -59,5 +77,5 @@ with open('config.yaml', 'w') as outfile:
 
 
 
-with open('heights.yaml', 'w') as outfile:
+with open('../data/YAML/heights.yaml', 'w') as outfile:
     yaml.dump(Known_Heights, outfile, default_flow_style=False)

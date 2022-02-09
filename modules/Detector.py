@@ -11,27 +11,24 @@ import numpy as np
 import os 
 import cv2 
 import yaml 
-
+import configparser as cfg
 
 
 class Detector:
     def __init__(self,threshold):
-        CFG_File = open(str(os.path.dirname(os.getcwd()+'\config\config.yaml')))
-        Parsed_CFG = yaml.load(CFG_File,Loader=yaml.FullLoader)
+        CFG_File = open(str(os.path.dirname(os.getcwd())+'\config\config.yaml'))
+        Parsed_CFG = yaml.load(CFG_File,Loader=yaml.FullLoader)[0]
 
         #Load Yolo Model Configurations from CFG file
         Yolo_Model_CFG = Parsed_CFG['Yolo CFG']
         Yolo_Model_Weights = Parsed_CFG['Yolo Weights']
-        Yolo_Model_Names = Parsed_CFG['Yolo Names']
         self.Yolo_Labels = Parsed_CFG['Yolo Labels']
+
+        print(self.Yolo_Labels)
         self.Yolo_Labels_Indexing = {label:index for index,label in self.Yolo_Labels} #Reverse Dict
 
         ##
         self.Thresh = threshold
-
-        #Scaling [Since Yolo converts the dimensions of the input Data we need to Calibrate it] 
-        self.Image_Scale_Factor = Parsed_CFG["Image Scale"]
-        self.Image_Size = Parsed_CFG['Image Size']
 
         #Load Model onto memory using OpenCV
         self.Yolo_Model = cv2.dnn.readNetFromDarknet(Yolo_Model_CFG,Yolo_Model_Weights)
@@ -53,9 +50,9 @@ class Detector:
         
         # STORAGE VARIABLES Initialize every Use when detecting
         self.Boxes, self.Confidences, self.Classification_ID = [],[],[]
-        Height,Width = data.shape[0],data.shape[1]
+        self.Height,self.Width = data.shape[0],data.shape[1]
         #Blob from Image preprocesses input data (mean subtraction, normalizing(Image Scale Factor), OPTIONAL (Channel Swapping))
-        self.BLOB = cv2.dnn.blobFromImage(data,self.Image_Scale_Factor,self.Image_Size,swapRB = True)
+        self.BLOB = cv2.dnn.blobFromImage(data,1/255,(416,416),swapRB = True)
         self.Yolo_Model.setInput(self.BLOB)
         self.Predictions = self.Yolo_Model.forward(self.Necessary_Layers)
 
@@ -67,7 +64,7 @@ class Detector:
                 Confidence  = Scores[Classification]
 
                 if Confidence>self.Thresh:
-                    Box = objects[:4]*np.array(Width,Height,Width,Height)
+                    Box = objects[:4]*np.array(self.Width,self.Height,self.Width,self.Height)
                     (CenterX,CenterY,Width,Height) = Box.astype('int')
                     XMin, YMin = CenterX-Width//2 , CenterY-Height//2
                     
@@ -104,8 +101,9 @@ class Detector:
         Target_Index = self.Yolo_Labels_Indexing[target] 
         if Target_Index in self.Classification_ID:
             Indexes = np.where(np.array(self.Classification_ID) == Target_Index)[0] ##an array of indexes
+            print(Indexes)
 
-            
+
 
 
 
@@ -123,7 +121,7 @@ class Detector:
         
         
         # return Coordinates
-        pass
+        # pass
 
 
         

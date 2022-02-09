@@ -19,11 +19,12 @@ class DepthEstimator:
     def __init__(self):
         print("Seer - Server Initializing .....")
         CFG_File = open(str(os.path.dirname(os.getcwd())+'\config\config.yaml'))
-        Parsed_CFG = yaml.load(CFG_File,Loader=yaml.FullLoader)
+        Parsed_CFG = yaml.load(CFG_File,Loader=yaml.FullLoader)[0]
         
+        # print(Parsed_CFG)
         #Loading Height Approximates
         Estimated_Heights_File =  open(str(os.path.dirname(os.getcwd())+'\data\YAML\heights.yaml'))
-        self.Estimated_Heights_Data = yaml.load(Estimated_Heights_File,Loader=yaml.FullLoader)
+        self.Estimated_Heights_Data = yaml.load(Estimated_Heights_File,Loader=yaml.FullLoader)[0]
 
         #Camera Settings
         self.camera_settings = Parsed_CFG["Camera Config"]
