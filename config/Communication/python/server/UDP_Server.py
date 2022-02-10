@@ -20,12 +20,12 @@ class Server:
     MAX = 2**16
     MAX_ERROR = MAX-64
 
-    def __init__ (self, Socket, Port, Address = "127.0.0.1"):
+    def __init__ (self, Socket=socket.socket(socket.AF_INET,socket.SOCK_DGRAM), Port=12345, Address = "127.0.0.1"):
         self.socket = Socket ## socket connection 
         self.port = Port
         self.addr = Address
 
-    def UDP_STREAM(self,frame):
+    def UDP_Data_STREAM(self,frame):
 
 
         ## convert to smallest file type which is jpg
@@ -37,10 +37,29 @@ class Server:
         index = 0
         while Datagram_Count:
 
-            last_Index = min(Size,index + self.MAX_ERROR)
+            last_index = min(Size,index + self.MAX_ERROR)
 
             self.socket.sendto(struct.pack("B",Datagram_Count)+ # converts data to bytes 
-                               String_Stream[]) 
+                               String_Stream[index:last_index],
+                               (self.addr,self.port))
+
+            index = last_index
+            Datagram_Count-=1
+
+    
+
+
+test = Server() 
+cam = cv2.VideoCapture(1)
+
+while cam.isOpened():
+    _frame = cam.read() 
+    test.UDP_Data_STREAM(cam)
+cam.release()
+cv2.destroyAllWindows()
+
+
+
 
 
 
