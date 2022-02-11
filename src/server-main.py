@@ -11,5 +11,4 @@ from Detector import Detector
 
 
 
-# test = DepthEstimator()
 test = Detector(0.2)

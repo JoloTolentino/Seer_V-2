@@ -19,6 +19,13 @@
 
 
 
+#### Streaming Options Available
+- [x] TCP-IP
+- [x] UDP
+
+
+
+
 
 ### Project Update 
 - [x] Calibration Testing

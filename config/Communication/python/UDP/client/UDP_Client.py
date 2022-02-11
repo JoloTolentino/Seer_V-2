@@ -15,7 +15,7 @@ class Client:
       
     def frame_buffer(self):
         while True:
-            data,addr = self.socket.recvfrom(self.MAX_DGRAM)
+            data,addr = self.Socket.recvfrom(self.MAX_DGRAM)
             if struct.unpack("B", data[0:1])[0]==1:
                 print("Transmission Terminated")
                 break
