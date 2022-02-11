@@ -30,13 +30,7 @@ class Detector:
             self.Yolo_Labels = [name.rstrip() for name in names]
 
 
-
-
-        print(self.Yolo_Labels)
-
-        # print(self.Yolo_Labels)
         self.Yolo_Labels_Indexing = {label:index for index,label in enumerate(self.Yolo_Labels)} #Reverse Dict
-
         ##
         self.Thresh = threshold
 
@@ -71,7 +65,7 @@ class Detector:
                 Confidence  = Scores[Classification]
 
                 if Confidence>self.Thresh:
-                    Box = objects[:4]*np.array(self.Width,self.Height,self.Width,self.Height)
+                    Box = objects[:4]*np.array([self.Width,self.Height,self.Width,self.Height])
                     (CenterX,CenterY,Width,Height) = Box.astype('int')
                     XMin, YMin = CenterX-Width//2 , CenterY-Height//2
                     
@@ -79,29 +73,35 @@ class Detector:
                     self.Boxes.append([XMin,YMin,Width,Height])
                     self.Confidences.append(float(Confidence))
                     self.Classification_ID.append(float(Classification))
+                    # print(self.Yolo_Labels[Classification])
 
 
-        self.Indexes=cv2.dnnNMSBoxes(self.Boxes,self.Confidences,self.Thresh,self.Thresh)
+
+        self.Indexes=cv2.dnn.NMSBoxes(self.Boxes,self.Confidences,self.Thresh,self.Thresh)
+
 
         if draw: 
             self.OverLay(data)
             
 
-    def OverLay(self,Yolo_Video_Feed):
-        try:
-            for i in self.Indexes.flatten():
-                (x, y) = (self.Boxes[i][0],self.Boxes[i][1])
-                (w, h) = (self.Boxes[i][2], self.Boxes[i][3])          
-                ## checking corresponding color for Class Predicted
-                color = [int(c) for c in self.COLORS[self.Classification_IDs[i]]]
-                ## Drawing Information into copied Video Frame 
-                cv2.rectangle(Yolo_Video_Feed, (x, y), (x + w, y + h), color, 2)
-                text = "{}: {:.2f}".format(self.Yolo_Labels[self.Classification_IDs[i]], self.Confidences[i])
-                cv2.putText(Yolo_Video_Feed, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5, color, 2)  
+    def OverLay(self,CameraFeed):
+        # try:
+        VideoFeed = CameraFeed.copy()
 
-        except: 
-            print("Model has low confidence in the Environment....")
-            return 
+        for i in self.Indexes.flatten():
+            (x, y) = (self.Boxes[i][0],self.Boxes[i][1])
+            (w, h) = (self.Boxes[i][2], self.Boxes[i][3])          
+            ## checking corresponding color for Class Predicted
+            color = [int(c) for c in self.COLORS[self.Classification_IDs[i]]]
+            ## Drawing Information into copied Video Frame 
+            cv2.rectangle(CameraFeed, (x, y), (x + w, y + h), color, 2)
+            text = "{}: {:.2f}".format(self.Yolo_Labels[self.Classification_IDs[i]], self.Confidences[i])
+            cv2.putText(CameraFeed, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5, color, 2)  
+            cv2.imshow("overlay",CameraFeed)
+        # except:
+        #     cv2.imshow("overlay",CameraFeed) 
+        #     print("Model has low confidence in the Environment....")
+        #     return 
 
 
     def Find(self,target):
