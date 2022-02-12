@@ -22,12 +22,15 @@ class Detector:
         #Load Yolo Model Configurations from CFG file
         Yolo_Model_CFG = Parsed_CFG['Yolo CFG']
         Yolo_Model_Weights = Parsed_CFG['Yolo Weights']
-
+        
         Yolo_Names_Directory= Parsed_CFG['Yolo Labels']
                 
 
         with open(Yolo_Names_Directory) as names:
             self.Yolo_Labels = [name.rstrip() for name in names]
+
+        self.COLORS = np.random.randint(0, 255, size=(len(self.Yolo_Labels), 3),
+	    dtype="uint8")
 
 
         self.Yolo_Labels_Indexing = {label:index for index,label in enumerate(self.Yolo_Labels)} #Reverse Dict
@@ -73,12 +76,12 @@ class Detector:
                     self.Boxes.append([XMin,YMin,Width,Height])
                     self.Confidences.append(float(Confidence))
                     self.Classification_ID.append(float(Classification))
-                    # print(self.Yolo_Labels[Classification])
+                    print(self.Yolo_Labels[Classification])
 
 
 
         self.Indexes=cv2.dnn.NMSBoxes(self.Boxes,self.Confidences,self.Thresh,self.Thresh)
-
+        print(self.Indexes.flatten())
 
         if draw: 
             self.OverLay(data)
@@ -87,17 +90,17 @@ class Detector:
     def OverLay(self,CameraFeed):
         # try:
         VideoFeed = CameraFeed.copy()
-
-        for i in self.Indexes.flatten():
-            (x, y) = (self.Boxes[i][0],self.Boxes[i][1])
-            (w, h) = (self.Boxes[i][2], self.Boxes[i][3])          
-            ## checking corresponding color for Class Predicted
-            color = [int(c) for c in self.COLORS[self.Classification_IDs[i]]]
-            ## Drawing Information into copied Video Frame 
-            cv2.rectangle(CameraFeed, (x, y), (x + w, y + h), color, 2)
-            text = "{}: {:.2f}".format(self.Yolo_Labels[self.Classification_IDs[i]], self.Confidences[i])
-            cv2.putText(CameraFeed, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5, color, 2)  
-            cv2.imshow("overlay",CameraFeed)
+        if len(self.Indexes) > 0:
+            for i in self.Indexes.flatten():
+                (x, y) = (self.Boxes[i][0],self.Boxes[i][1])
+                (w, h) = (self.Boxes[i][2], self.Boxes[i][3])          
+                ## checking corresponding color for Class Predicted
+                # color = [int(c) for c in self.COLORS[self.Classification_ID[i]]]
+                ## Drawing Information into copied Video Frame 
+                cv2.rectangle(CameraFeed, (x, y), (x + w, y + h), (0,255,0), 2)
+                # text = "{}: {:.2f}".format(self.Yolo_Labels[self.Classification_ID[i]], self.Confidences[i])
+                # cv2.putText(CameraFeed, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,255,0) , 2)  
+                cv2.imshow("overlay",CameraFeed)
         # except:
         #     cv2.imshow("overlay",CameraFeed) 
         #     print("Model has low confidence in the Environment....")
