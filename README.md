@@ -32,6 +32,6 @@
 - [x] Calibration Module
 - [x] Configuration Module
 - Depth Estimation Module
-- Object Detection Module
+- [x] Object Detection Module
 - Pose Estiamtion Module
 - Cliet-Server Module

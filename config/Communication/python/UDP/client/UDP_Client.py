@@ -8,7 +8,7 @@ import struct
 class Client: 
     
     MAX_DGRAM = 2**16
-    def __init__(self,socket,port = 12345,address = "127.0.0.1"):
+    def __init__(self,socket,port = 12345,address = "127.0.0.1"): #IP
         self.Socket = socket
         self.Port = port 
         self.Addr = address 

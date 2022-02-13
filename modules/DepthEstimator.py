@@ -6,6 +6,7 @@
 
 ### DepthEstimator.py uses the MiDas Depth prediction Model (model-f6b98070.onnx) 
 
+from git import Blob
 import numpy as np
 import OrientationEstimator 
 import Detector
@@ -52,8 +53,8 @@ class DepthEstimator:
         else:
             print("Model Not Found. Program is Now Exiting....")
             return 0 
-    
-    def DepthToDistance(self,Known,Known_h, target):
+  
+    def Comparative_Analysis(self,Known,Known_h, target):
         #Based on Estimated Heights we estimate the distance of the target object 
         if Known in self.Estimated_Heights_Data:   
             self.KnownDistance = (self.Estimated_Heights_Data[Known]*self.focal_length)/ (Known_h*10)
@@ -65,16 +66,23 @@ class DepthEstimator:
         # We then take in Coordinates of the target
         
         # Place target Data
-
-        
-
-
         self.targetDistance = (self.KnownDistance* self.DepthMap[TargetCoords[0],TargetCoords[1]])/self.DepthMap[RefCoords[0],RefCoords[1]]
 
 
 
 
 
+    def DepthMap(self, stream, Display = False): 
+        
+        Height,Width = stream.shape[0],stream.shape[1]
+        RGB_Stream = stream[:,:,::-1] #Takes in OPENCV BGR input
+        Binary_Large_Object= cv2.dnn.blobFromImage(RGB_Stream,1/255.,(384,384),(123.675, 116.28, 103.53), True, False)
+        self.model.setInput(Binary_Large_Object)
+        self.output = self.model.forward()
+
+        self.output = self.output[0,:,:]
+        self.output = cv2.resize(self.output, (Width, Height))
+        self.output = cv2.normalize(self.output, None, 0, 1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
 
 
         

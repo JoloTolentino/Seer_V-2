@@ -29,8 +29,7 @@ class Detector:
         with open(Yolo_Names_Directory) as names:
             self.Yolo_Labels = [name.rstrip() for name in names]
 
-        self.COLORS = np.random.randint(0, 255, size=(len(self.Yolo_Labels), 3),
-	    dtype="uint8")
+       
 
 
         self.Yolo_Labels_Indexing = {label:index for index,label in enumerate(self.Yolo_Labels)} #Reverse Dict
@@ -75,37 +74,32 @@ class Detector:
 
                     self.Boxes.append([XMin,YMin,Width,Height])
                     self.Confidences.append(float(Confidence))
-                    self.Classification_ID.append(float(Classification))
+                    self.Classification_ID.append(Classification)
                     print(self.Yolo_Labels[Classification])
 
 
-
         self.Indexes=cv2.dnn.NMSBoxes(self.Boxes,self.Confidences,self.Thresh,self.Thresh)
-        print(self.Indexes.flatten())
 
         if draw: 
             self.OverLay(data)
             
 
     def OverLay(self,CameraFeed):
-        # try:
         VideoFeed = CameraFeed.copy()
-        if len(self.Indexes) > 0:
+        try:
             for i in self.Indexes.flatten():
                 (x, y) = (self.Boxes[i][0],self.Boxes[i][1])
                 (w, h) = (self.Boxes[i][2], self.Boxes[i][3])          
-                ## checking corresponding color for Class Predicted
-                # color = [int(c) for c in self.COLORS[self.Classification_ID[i]]]
-                ## Drawing Information into copied Video Frame 
-                cv2.rectangle(CameraFeed, (x, y), (x + w, y + h), (0,255,0), 2)
-                # text = "{}: {:.2f}".format(self.Yolo_Labels[self.Classification_ID[i]], self.Confidences[i])
-                # cv2.putText(CameraFeed, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,255,0) , 2)  
-                cv2.imshow("overlay",CameraFeed)
-        # except:
-        #     cv2.imshow("overlay",CameraFeed) 
-        #     print("Model has low confidence in the Environment....")
-        #     return 
+                cv2.rectangle(VideoFeed, (x, y), (x + w, y + h), (255,255,0), 2)
+                text = "{}: {:.2f}".format(self.Yolo_Labels[self.Classification_ID[i]], self.Confidences[i])
+                cv2.putText(CameraFeed, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2)  
+                cv2.imshow("Height Display",VideoFeed)
 
+        except: 
+            text = "Model has low confidence in the Environment...."
+            cv2.putText(VideoFeed, text, (0, 10), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2)  
+            cv2.imshow("Height Display",VideoFeed)
+       
 
     def Find(self,target):
         Target_Index = self.Yolo_Labels_Indexing[target] 
