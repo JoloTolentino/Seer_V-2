@@ -22,16 +22,13 @@ class Detector:
         #Load Yolo Model Configurations from CFG file
         Yolo_Model_CFG = Parsed_CFG['Yolo CFG']
         Yolo_Model_Weights = Parsed_CFG['Yolo Weights']
-        
         Yolo_Names_Directory= Parsed_CFG['Yolo Labels']
                 
 
         with open(Yolo_Names_Directory) as names:
             self.Yolo_Labels = [name.rstrip() for name in names]
 
-       
-
-
+      
         self.Yolo_Labels_Indexing = {label:index for index,label in enumerate(self.Yolo_Labels)} #Reverse Dict
         ##
         self.Thresh = threshold
@@ -119,13 +116,3 @@ class Detector:
 
             
 
-
-
-
-        
-        
-        # return Coordinates
-        # pass
-
-
-        
