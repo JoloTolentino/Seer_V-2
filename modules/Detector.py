@@ -102,7 +102,8 @@ class Detector:
         Target_Index = self.Yolo_Labels_Indexing[target] 
         if Target_Index in self.Classification_ID:
             Indexes = np.where(np.array(self.Classification_ID) == Target_Index)[0] ##an array of indexes
-            print(Indexes)
+            
+            
 
 
 

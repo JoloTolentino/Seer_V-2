@@ -15,7 +15,7 @@ import cv2
 
 
 class AngleOrientation:
-    def __init__(self):
+    def __init__(self,ObjectRefference):
         pass
 
     

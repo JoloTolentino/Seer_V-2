@@ -31,7 +31,7 @@
 - [x] Calibration Testing
 - [x] Calibration Module
 - [x] Configuration Module
-- Depth Estimation Module
-- [x] Object Detection Module
-- Pose Estiamtion Module
+- Depth Estimation Module (Required)
+- [x] Object Detection Module (Required)
+- Pose Estiamtion Module (Optional)
 - Cliet-Server Module
