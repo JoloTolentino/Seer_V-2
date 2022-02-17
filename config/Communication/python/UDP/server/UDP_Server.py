@@ -20,7 +20,7 @@ class Server:
     MAX = 2**16
     MAX_ERROR = MAX-64
 
-    def __init__ (self, Socket=socket.socket(socket.AF_INET,socket.SOCK_DGRAM), Port=12345, Address = "127.0.0.1"):
+    def __init__ (self, Socket=socket.socket(socket.AF_INET,socket.SOCK_DGRAM), Port=5000, Address = "192.168.0.3"):
         self.socket = Socket ## socket connection 
         self.port = Port
         self.addr = Address
