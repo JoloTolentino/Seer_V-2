@@ -8,7 +8,7 @@
 ### We recognize angle orientation of desired Target Objects
 
 
-
+import yaml
 import mediapipe as mp 
 import cv2 
 
@@ -16,7 +16,20 @@ import cv2
 
 class AngleOrientation:
     def __init__(self,ObjectRefference):
-        pass
+
+
+
+        self.TargetObect = ObjectRefference
+
+        if self.TargetObect not in self.KnownObjects:
+             
+        
+
+    def Orientation(self,coordinates,BBox,feed):
+        self.x,self.y,self.z = coordinates[0],coordinates[1],coordinates[2]
+
+
+    def Rot_X(self) 
 
     
 

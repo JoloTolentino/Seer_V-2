@@ -98,12 +98,12 @@ class Detector:
             cv2.imshow("Height Display",VideoFeed)
        
 
-    def Find(self,target):
+    def Find(self,target,draw = False):
         Target_Index = self.Yolo_Labels_Indexing[target] 
         if Target_Index in self.Classification_ID:
             Indexes = np.where(np.array(self.Classification_ID) == Target_Index)[0] ##an array of indexes
             
-            
+
 
 
 
