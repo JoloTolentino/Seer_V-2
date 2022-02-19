@@ -77,6 +77,7 @@ class Detector:
 
 
         self.Indexes=cv2.dnn.NMSBoxes(self.Boxes,self.Confidences,self.Thresh,self.Thresh)
+        self.Indexes = self.Indexes.flatten()
 
         if draw: 
             self.OverLay(data)
@@ -85,7 +86,7 @@ class Detector:
     def OverLay(self,CameraFeed):
         VideoFeed = CameraFeed.copy()
         try:
-            for i in self.Indexes.flatten():
+            for i in self.Indexes:
                 (x, y) = (self.Boxes[i][0],self.Boxes[i][1])
                 (w, h) = (self.Boxes[i][2], self.Boxes[i][3])          
                 cv2.rectangle(VideoFeed, (x, y), (x + w, y + h), (255,255,0), 2)
@@ -105,14 +106,12 @@ class Detector:
         if Target_Index in self.Classification_ID:
             Indexes = np.where(np.array(self.Classification_ID) == Target_Index)[0] ##an array of indexes
             plurarity = "s." if len(Indexes)>1 else "."
-            # print(type(plurarity))
             text = "Found "+str(len(Indexes))+" " +self.Yolo_Labels[Target_Index]+plurarity
             print(text)
             try:
                 for index in Indexes:
                     (x,y) = (self.Boxes[index][0],self.Boxes[index][1])
                     (w,h) = (self.Boxes[index][2],self.Boxes[index][3])
-
                     return (x,y,w,h)
             except:
                 return "Target Object Not Found"

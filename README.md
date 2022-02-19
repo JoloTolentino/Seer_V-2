@@ -35,3 +35,9 @@
 - [x] Object Detection Module (Required)
 - Pose Estiamtion Module (Optional)
 - Cliet-Server Module
+
+
+### How to run 
+
+1.  Using the command prompt terminal change the directory cd "~/DepthEstimator/src/"
+2.  run the script "server-main.py" with the command "python server-main.py"
