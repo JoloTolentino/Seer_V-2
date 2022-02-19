@@ -73,7 +73,7 @@ class Detector:
                     self.Boxes.append([XMin,YMin,Width,Height])
                     self.Confidences.append(float(Confidence))
                     self.Classification_ID.append(Classification)
-                    print(self.Yolo_Labels[Classification])
+                    # print(self.Yolo_Labels[Classification])
 
 
         self.Indexes=cv2.dnn.NMSBoxes(self.Boxes,self.Confidences,self.Thresh,self.Thresh)
@@ -104,7 +104,10 @@ class Detector:
         Target_Index = self.Yolo_Labels_Indexing[target] 
         if Target_Index in self.Classification_ID:
             Indexes = np.where(np.array(self.Classification_ID) == Target_Index)[0] ##an array of indexes
-            print("Found "+str(len(Indexes))+ self.Yolo_Labels[Target_Index])
+            plurarity = "s." if len(Indexes)>1 else "."
+            # print(type(plurarity))
+            text = "Found "+str(len(Indexes))+" " +self.Yolo_Labels[Target_Index]+plurarity
+            print(text)
             try:
                 for index in Indexes:
                     (x,y) = (self.Boxes[index][0],self.Boxes[index][1])
