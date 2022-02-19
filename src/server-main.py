@@ -17,12 +17,12 @@ import cv2
 
 
 test = Detector(0)
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 
 while True: 
     _,frame = cam.read()
     test.Detect(frame,draw=True)
-    test.Find(frame,"umbrella",draw = True)
+    test.Find(frame,"umbrella")
 
     cv2.imshow("YOLO",frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):

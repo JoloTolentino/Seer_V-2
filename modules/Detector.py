@@ -30,6 +30,7 @@ class Detector:
 
       
         self.Yolo_Labels_Indexing = {label:index for index,label in enumerate(self.Yolo_Labels)} #Reverse Dict
+   
         ##
         self.Thresh = threshold
 
@@ -98,12 +99,22 @@ class Detector:
             cv2.imshow("Height Display",VideoFeed)
        
 
-    def Find(self,target,draw = False):
+    def Find(self,frame,target,draw = False):
+        self.Detect(frame)
         Target_Index = self.Yolo_Labels_Indexing[target] 
         if Target_Index in self.Classification_ID:
             Indexes = np.where(np.array(self.Classification_ID) == Target_Index)[0] ##an array of indexes
-            
-            
+            print("Found "+str(len(Indexes))+ self.Yolo_Labels[Target_Index])
+            try:
+                for index in Indexes:
+                    (x,y) = (self.Boxes[index][0],self.Boxes[index][1])
+                    (w,h) = (self.Boxes[index][2],self.Boxes[index][3])
+
+                    return (x,y,w,h)
+            except:
+                return "Target Object Not Found"
+
+
 
 
 
