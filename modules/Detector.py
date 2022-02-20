@@ -77,7 +77,7 @@ class Detector:
 
 
         self.Indexes=cv2.dnn.NMSBoxes(self.Boxes,self.Confidences,self.Thresh,self.Thresh)
-        self.Indexes = self.Indexes.flatten()
+        self.Indexes = np.array(self.Indexes).flatten()     
 
         if draw: 
             self.OverLay(data)
@@ -102,9 +102,10 @@ class Detector:
 
     def Find(self,frame,target,draw = False):
         self.Detect(frame)
+        copy = frame.copy()
         Target_Index = self.Yolo_Labels_Indexing[target] 
         if Target_Index in self.Classification_ID:
-            Indexes = np.where(np.array(self.Classification_ID) == Target_Index)[0] ##an array of indexes
+            Indexes = np.where(np.array(self.Indexes) == Target_Index)[0] ##an array of indexes
             plurarity = "s." if len(Indexes)>1 else "."
             text = "Found "+str(len(Indexes))+" " +self.Yolo_Labels[Target_Index]+plurarity
             print(text)
@@ -112,9 +113,15 @@ class Detector:
                 for index in Indexes:
                     (x,y) = (self.Boxes[index][0],self.Boxes[index][1])
                     (w,h) = (self.Boxes[index][2],self.Boxes[index][3])
+                    # cv2.rectangle(frame, (x, y), (x + w, y + h), (255,255,0), 2)
+                    # text = "{}: {:.2f}".format(self.Yolo_Labels[self.Classification_ID[i]], self.Confidences[i])
+                    cv2.putText(copy,text, (10, 15), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2)
+                    cv2.putText(copy,"Pixel height : " + str(h) + " px", (10, 30), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2)  
+                    cv2.imshow("Coordinates",copy)
+                    
                     return (x,y,w,h)
             except:
-                return "Target Object Not Found"
+                cv2.imshow("Coordinates",copy)
 
 
 

@@ -73,12 +73,12 @@ class DepthEstimator:
             cv2.imshow('Depth Map',self.output)
 
 
-    def Comparative_Analysis(self,Known_Object_Name,Known_Object_Height, target):
+    def Comparative_Analysis(self,Camera_Feed, Known_Object_Name,Known_Object_Height, target):
         #Based on Estimated Heights we estimate the distance of the target object 
         if Known_Object_Name in self.Estimated_Heights_Data:   
             self.KnownDistance = (self.Estimated_Heights_Data[Known_Object_Name]*self.focal_length)/ (Known_Object_Height*10)
-            self.TargetCoords = Detector.find(target)
-            self.RefCoords = Detector.find(Known_Object_Name) 
+            self.TargetCoords = Detector.find(Camera_Feed,target)
+            self.RefCoords = Detector.find(Camera_Feed,Known_Object_Name) 
         else:
             print("No Refference Object.")
         
