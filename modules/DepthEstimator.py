@@ -6,7 +6,7 @@
 
 ### DepthEstimator.py uses the MiDas Depth prediction Model (model-f6b98070.onnx) 
 
-from git import Blob
+# from git import Blob
 import numpy as np
 import OrientationEstimator 
 import Detector

@@ -40,4 +40,5 @@
 ### How to run 
 
 1.  Using the command prompt terminal change the directory cd "~/DepthEstimator/src/"
+2.  Configure Project first using "config.py" found using 
 2.  run the script "server-main.py" with the command "python server-main.py"

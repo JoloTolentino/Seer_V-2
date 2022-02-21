@@ -30,8 +30,6 @@ class Detector:
 
       
         self.Yolo_Labels_Indexing = {label:index for index,label in enumerate(self.Yolo_Labels)} #Reverse Dict
-   
-        ##
         self.Thresh = threshold
 
         #Load Model onto memory using OpenCV
@@ -45,7 +43,8 @@ class Detector:
         else: 
             print("Object Detection Model Not Found...")
 
-
+    'The Detect function is responsible for pre processing and collating all the'
+    'objects found within a given frame '
 
     def Detect(self,data, draw = False):
         
@@ -82,6 +81,8 @@ class Detector:
         if draw: 
             self.OverLay(data)
             
+    'The Overlay function is responsible to draw the bounding boxes of all '
+    ' objects found within the given frame without labels.  '  
 
     def OverLay(self,CameraFeed):
         VideoFeed = CameraFeed.copy()
@@ -100,6 +101,9 @@ class Detector:
             cv2.imshow("Height Display",VideoFeed)
        
 
+    'The Find function is responsible to locate all the instances of the'
+    ' specific target object that the user/developer would like to locate '  
+
     def Find(self,frame,target,draw = False):
         self.Detect(frame)
         copy = frame.copy()
@@ -113,10 +117,9 @@ class Detector:
                 for index in Indexes:
                     (x,y) = (self.Boxes[index][0],self.Boxes[index][1])
                     (w,h) = (self.Boxes[index][2],self.Boxes[index][3])
-                    # cv2.rectangle(frame, (x, y), (x + w, y + h), (255,255,0), 2)
-                    # text = "{}: {:.2f}".format(self.Yolo_Labels[self.Classification_ID[i]], self.Confidences[i])
                     cv2.putText(copy,text, (10, 15), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2)
-                    cv2.putText(copy,"Pixel height : " + str(h) + " px", (10, 30), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2)  
+                    cv2.putText(copy,"Pixel height : " + str(h) + " px", (10, 30), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2) 
+                    cv2.putText(copy,"x: " + str(x+(w//2)) + " y: "+str(y+(h//2)), (10, 45), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2)   
                     cv2.imshow("Coordinates",copy)
                     
                     return (x,y,w,h)

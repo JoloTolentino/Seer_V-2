@@ -14,7 +14,7 @@ from Detector import Detector
 import cv2 
 
 
-
+# depthMap = DepthEstimator
 
 test = Detector(0)
 cam = cv2.VideoCapture(0)
@@ -24,7 +24,7 @@ while True:
     test.Detect(frame,draw=True)
     test.Find(frame,"person")
 
-    cv2.imshow("YOLO",frame)
+    # cv2.imshow("YOLO",frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
