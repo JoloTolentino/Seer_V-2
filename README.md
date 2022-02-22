@@ -6,12 +6,12 @@
 
 
 ### Python Dependencies 
-##### 1. OpenCV (Cuda Compiled Optional)
-##### 2. MediaPipe 
-##### 3. Numpy 
-##### 4. Yaml
-##### 5. Yaml
-##### 6. Models Folder with Corresponding Models
+1. OpenCV (Cuda Compiled Optional)
+2. MediaPipe 
+3. Numpy 
+4. Yaml
+5. Models Folder with Corresponding Models
+
 
 
 ### JavaScript Dependeencies
@@ -31,7 +31,7 @@
 - [x] Calibration Testing
 - [x] Calibration Module
 - [x] Configuration Module
-- Depth Estimation Module (Required)
+- [x] Depth Estimation Module (Required)
 - [x] Object Detection Module (Required)
 - Pose Estiamtion Module (Optional)
 - Cliet-Server Module
