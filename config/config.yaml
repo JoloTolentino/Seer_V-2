@@ -6,5 +6,5 @@
   Yolo CFG: D:\Desktop\DepthEstimator\data\Yolo.cfg
   Yolo Labels: D:\Desktop\DepthEstimator\data\coco.names
   Yolo Weights: D:\Desktop\DepthEstimator\models\Yolo.weights
-  model: model-f6b98070.onnx
+  model: \model-f6b98070.onnx
   model path: D:\Desktop\DepthEstimator\models

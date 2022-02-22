@@ -17,7 +17,7 @@ BaseDir =  str(os.path.dirname(os.getcwd()))
 print(BaseDir)
 default_config_file = [
     {
-        "model": "model-f6b98070.onnx",
+        "model": "\model-f6b98070.onnx",
         "model path":  BaseDir+"\models",
         "Camera Config": {
             "Camera Name": "Logitech C270",

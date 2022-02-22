@@ -122,7 +122,7 @@ class Detector:
                     cv2.putText(copy,"x: " + str(x+(w//2)) + " y: "+str(y+(h//2)), (10, 45), cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,0) , 2)   
                     cv2.imshow("Coordinates",copy)
                     
-                    return (x,y,w,h)
+                    return [x+w//2,y+h//2]
             except:
                 cv2.imshow("Coordinates",copy)
 

@@ -8,21 +8,22 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'config','Communicatio
 
 
 from DepthEstimator import DepthEstimator
-from Detector import Detector 
+# from Detector import Detector 
 # from OrientationEstimator imp
 
 import cv2 
 
 
-# depthMap = DepthEstimator
+Depth = DepthEstimator()
 
-test = Detector(0)
+# test = Detector(0)
 cam = cv2.VideoCapture(0)
 
 while True: 
     _,frame = cam.read()
-    test.Detect(frame,draw=True)
-    test.Find(frame,"person")
+    Depth.DepthMap(frame,Display=True)
+    # test.Detect(frame,draw=True)
+    # test.Find(frame,"person")
 
     # cv2.imshow("YOLO",frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):

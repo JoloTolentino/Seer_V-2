@@ -9,7 +9,7 @@
 # from git import Blob
 import numpy as np
 import OrientationEstimator 
-import Detector
+from Detector import Detector 
 import os 
 import cv2 
 import yaml 
@@ -17,7 +17,7 @@ import yaml
 
 
 class DepthEstimator:
-    def __init__(self):
+    def __init__(self,CPU= True):
         print("Seer - Server Initializing .....")
         CFG_File = open(str(os.path.dirname(os.getcwd())+'\config\config.yaml'))
         Parsed_CFG = yaml.load(CFG_File,Loader=yaml.FullLoader)[0]
@@ -34,9 +34,9 @@ class DepthEstimator:
         self.focal_length = self.camera_settings["Focal Length"]
         
         print("Running Configuration Settings for : "+ self.camera_name )
-        
-        self.LoadModel(Parsed_CFG["model"])
-        self.Detector = Detector()
+        print("Model Location : "+Parsed_CFG["model path"])
+        self.LoadModel(Parsed_CFG["model path"] + Parsed_CFG["model"])
+        self.Detector = Detector(0)
 
 
         ## Open Camera
@@ -62,31 +62,34 @@ class DepthEstimator:
         RGB_Stream = stream[:,:,::-1] #Takes in OPENCV BGR input
         Binary_Large_Object= cv2.dnn.blobFromImage(RGB_Stream,1/255.,(384,384),(123.675, 116.28, 103.53), True, False)
         self.model.setInput(Binary_Large_Object)
-        self.Depth_Map = self.model.forward()
+        self.output = self.model.forward()
 
         self.Depth_Map = self.output[0,:,:]
-        self.Depth_Map = cv2.resize(self.output, (Width, Height))
-        self.Depth_Map = cv2.normalize(self.output, None, 0, 1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+        self.Depth_Map = cv2.resize(self.Depth_Map, (Width, Height))
+        self.Depth_Map = cv2.normalize(self.Depth_Map, None, 0, 1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
 
 
         if Display: 
-            cv2.imshow('Depth Map',self.output)
+            cv2.imshow('Depth Map',self.Depth_Map)
 
 
     def Comparative_Analysis(self,Camera_Feed, Known_Object_Name,Known_Object_Height, target):
         #Based on Estimated Heights we estimate the distance of the target object 
         if Known_Object_Name in self.Estimated_Heights_Data:   
             self.KnownDistance = (self.Estimated_Heights_Data[Known_Object_Name]*self.focal_length)/ (Known_Object_Height*10)
-            self.TargetCoords = Detector.find(Camera_Feed,target)
-            self.RefCoords = Detector.find(Camera_Feed,Known_Object_Name) 
+            self.TargetCoords = self.Detector.find(Camera_Feed,target)
+            self.RefCoords = self.Detector.find(Camera_Feed,Known_Object_Name) 
+              # Place target Data
+            self.targetDistance = (self.KnownDistance* self.Depth_Map[self.TargetCoords[0],self.TargetCoords[1]])/self.Depth_Map[self.RefCoords[0],self.RefCoords[1]]
+
         else:
             print("No Refference Object.")
+            return 0 
+
         
         # We then take in Coordinates of the target
         
-        # Place target Data
-        self.targetDistance = (self.KnownDistance* self.Depth_Map[self.TargetCoords[0],self.TargetCoords[1]])/self.Depth_Map[self.RefCoords[0],self.RefCoords[1]]
-
+      
         
 
 
