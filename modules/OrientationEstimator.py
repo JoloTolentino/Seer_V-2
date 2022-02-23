@@ -10,6 +10,7 @@
 
 import yaml
 import mediapipe as mp 
+import math 
 import cv2 
 import os 
 
@@ -27,19 +28,19 @@ class AngleRotation:
             return print('Pls, use a different object')
              
 
-    def Orientation(self,coordinates,SixD_Bounding_Box,feed):
-        ###Center Coordinates
-        self.x,self.y,self.z = coordinates[0],coordinates[1],coordinates[2]
-        self.Graph = SixD_Bounding_Box # takes in Graph representation where G = [V,N] where G represents a graph while V is Vertex i and its Neighbors N
+    # def Orientation(self,Rotation_Matrix,feed):
+    #     ###Center Coordinates
         
-
-    def Rot_X(self,yFrame,zFrame):
+    def Pitch(self):
+        
+        self.pitch = math.atan2(self.) 
+        
         pass
 
-    def Rot_Y(self,xFrame,zFrame):
+    def Yaw(self):
         pass
 
-    def Rot_Z(self,xFrame,yFrame):
+    def Roll(self):
         pass
 
 
