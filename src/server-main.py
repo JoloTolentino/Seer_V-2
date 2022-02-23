@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 # from matplotlib.pyplot import draw
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'modules'))
@@ -22,6 +23,7 @@ cam = cv2.VideoCapture(0)
 while True: 
     _,frame = cam.read()
     Depth.DepthMap(frame,Display=True)
+    
     # test.Detect(frame,draw=True)
     # test.Find(frame,"person")
 

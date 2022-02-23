@@ -32,8 +32,38 @@ class AngleRotation:
         self.drawing = mp.solutions.drawing_utils
         self.objectron = mp.solutions.objectron
 
-    def Find(self):
-         
+    
+    def Median_Filter(self):
+        pass
+    
+    
+    def Find_2D_Height(self,stream):
+
+        with self.objectron.Objectron(static_image_mode =False,
+                                    max_num_objects = 1,
+                                    min_detection_confidence = 0.5,
+                                    min_tracking_confidence = 0.99,
+                                    model_name = self.Target_Object) as objctron:
+            stream.flags.writeable = False
+            stream = cv2.cvtColor(stream,cv2.COLOR_BGR2RGB)
+            results = objctron.process(stream)
+
+            self.Rotation_Matrix = results.detected_objects.rotation
+            self.Object_Landmarks = results.detected.landmarks_2D
+            self.ThreeD_Bounding_Box = self.objectron.BOX_CONNECTIONS
+
+            self.Euler_Angles()
+
+
+
+
+
+
+
+    def Euler_Angles(self):
+        self.Pitch()
+        self.Roll()
+
 
 
     def Pitch(self): #rotation about the y axis

@@ -1,7 +1,7 @@
 # SEER - V2
 
- Assistive Blind Aid through Monocular Depth Estimation, Object Detection and Object Pose Estimation.
- Estimating Spatial Perception through Computer Vision to Aid the Visually Impaired for Day to Day Interaction
+ Assistive Navigation through Monocular Depth Estimation, Object Detection and Object Pose Estimation.
+ Estimating Spatial Perception through Computer Vision to Aid the Visually Impaired for Day to Day Applicationns.
 
 
 ### Python Dependencies 
@@ -17,6 +17,7 @@
 
 
 
+### Monocular Depth Estimation : 
 
 ### Angle Orientation Principle : 
  In 3D graphics, we precieve object orientation through Pitch, Yaw and Roll (x,y and z rotation) of an Object. 
