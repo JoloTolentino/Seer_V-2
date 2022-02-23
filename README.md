@@ -1,10 +1,8 @@
 # SEER - V2
+## At a glance...
+ The SEER-V2 is an Assistive Navigation API aiming to provide Spatial Perception through Computer Vision to Aid Autonomous Systems and the Visually Impaired for Day to Day Applications.  Through Monocular Depth Estimation, Object Detection and Object Pose Estimation, The SEER-V2 aims to Provide Crude Distance Estimates through Ergonomic Knowns.
 
- Assistive Navigation through Monocular Depth Estimation, Object Detection and Object Pose Estimation.
- Estimating Spatial Perception through Computer Vision to Aid Autonomous Systems and the Visually Impaired for Day to Day Applications.
-
-
-### The Novel Monocular Depth Estimation Solution: 
+### The Integration of the Integral Novel Monocular Depth Estimation Solution: 
 Spatial Recognition Provides the Visually Impaired and Autonomous Systems the Ability to Recognize Obstacles in their day to day interactions. Depth Maps are not new, although recently, the recent release of MiDas has provided a novel solution to generate Depth Maps. In the past, Stereo-Vision, Lidar solutions were the primary technique 
 
 ### The Object Detection Contribution :
