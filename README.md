@@ -1,7 +1,7 @@
 # SEER - V2
 
  Assistive Navigation through Monocular Depth Estimation, Object Detection and Object Pose Estimation.
- Estimating Spatial Perception through Computer Vision to Aid the Visually Impaired for Day to Day Applicationns.
+ Estimating Spatial Perception through Computer Vision to Aid Autonomous Systems and the Visually Impaired for Day to Day Applications.
 
 
 ### Python Dependencies 
@@ -12,16 +12,17 @@
 5. Models Folder with Corresponding Models
 
 
-### JavaScript Dependeencies
+### JavaScript Dependencies
 
 
 
 
 ### Monocular Depth Estimation : 
+Spatial Recognition through
 
 ### Angle Orientation Principle : 
  In 3D graphics, we precieve object orientation through Pitch, Yaw and Roll (x,y and z rotation) of an Object. 
- If we were to extract the known the 
+ If we were to extract the Euler Angles Of an Object, We are Able to Derive the projected 2D pixel Height of an Object from the 3D Bounding Box thus allowing us predict the distance Estimate.  
 
 
 #### Streaming Options Available
@@ -30,8 +31,8 @@
 
 #### Streaming Options Available
 - [x] Python API
--  JavaScript API
--  C++ API
+- JavaScript API
+- C++ API
 
 ### Project Update 
 - [x] Calibration Testing
