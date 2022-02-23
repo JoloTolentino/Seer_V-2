@@ -73,12 +73,12 @@ class DepthEstimator:
             cv2.imshow('Depth Map',self.Depth_Map)
 
 
-    def Comparative_Analysis(self,Camera_Feed, Known_Object_Name,Known_Object_Height, target):
+    def Comparative_Analysis(self,stream, Known_Object_Name,Known_Object_Height, target):
         #Based on Estimated Heights we estimate the distance of the target object 
         if Known_Object_Name in self.Estimated_Heights_Data:   
             self.KnownDistance = (self.Estimated_Heights_Data[Known_Object_Name]*self.focal_length)/ (Known_Object_Height*10)
-            self.TargetCoords = self.Detector.find(Camera_Feed,target)
-            self.RefCoords = self.Detector.find(Camera_Feed,Known_Object_Name) 
+            self.TargetCoords = self.Detector.find(stream,target)
+            self.RefCoords = self.Detector.find(stream,Known_Object_Name) 
               # Place target Data
             self.targetDistance = (self.KnownDistance* self.Depth_Map[self.TargetCoords[0],self.TargetCoords[1]])/self.Depth_Map[self.RefCoords[0],self.RefCoords[1]]
 

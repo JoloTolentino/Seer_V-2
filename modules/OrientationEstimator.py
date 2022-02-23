@@ -21,27 +21,30 @@ class AngleRotation:
         Parsed_CFG = yaml.load(CFG_File,Loader=yaml.FullLoader)[0]
 
         #Loads Known Objects
-        self.KnownObjects= Parsed_CFG['6D Objects']
-        self.TargetObect = ObjectRefference
+        self.Known_Objects= ["Cup","Shoe"]
+        self.Target_Object = ObjectRefference
 
-        if self.TargetObect not in self.KnownObjects:
+        if self.Target_Object not in self.Known_Objects:
             return print('Pls, use a different object')
-             
 
-    # def Orientation(self,Rotation_Matrix,feed):
-    #     ###Center Coordinates
-        
-    def Pitch(self):
-        
-        self.pitch = math.atan2(self.) 
-        
-        pass
+        print('Estimating Angle....')
 
-    def Yaw(self):
-        pass
+        self.drawing = mp.solutions.drawing_utils
+        self.objectron = mp.solutions.objectron
 
-    def Roll(self):
-        pass
+    def Find(self):
+         
+
+
+    def Pitch(self): #rotation about the y axis
+        self.Yaw()
+        self.pitch = math.atan2(-1*self.Rotation_Matrix[2][0],self.Rotation_Matrix[0][0]) if self.yaw!=0 else  math.atan2(-1*self.Rotation_Matrix[2][0],self.Rotation_Matrix[1][0])
+
+    def Yaw(self): #rotation about the z axis
+        self.yaw  = math.atan2(self.Rotation_Matrix[1][0],self.Rotation_Matrix[0][0]) 
+
+    def Roll(self): # rotation about the x axis
+        self.roll = math.atan2(self.Rotation_Matrix[2][1],self.Rotation_Matrix[2][2]) 
 
 
 

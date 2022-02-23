@@ -19,8 +19,8 @@
 
 
 ### Angle Orientation Principle : 
-## In 3D graphics, we precieve object orientation through Pitch, Yaw and Roll (x,y and z rotation) of an Object. 
-## If we were to extract the known the 
+ In 3D graphics, we precieve object orientation through Pitch, Yaw and Roll (x,y and z rotation) of an Object. 
+ If we were to extract the known the 
 
 
 #### Streaming Options Available
@@ -29,8 +29,8 @@
 
 #### Streaming Options Available
 - [x] Python API
-- [] JavaScript API
-- [] C++ API
+-  JavaScript API
+-  C++ API
 
 ### Project Update 
 - [x] Calibration Testing
