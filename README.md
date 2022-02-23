@@ -1,9 +1,9 @@
 # SEER - V2
-## At a glance...
- The SEER-V2 is an Assistive Navigation API aiming to provide Spatial Perception through Computer Vision to Aid Autonomous Systems and the Visually Impaired for Day to Day Applications.  Through Monocular Depth Estimation, Object Detection and Object Pose Estimation, The SEER-V2 aims to Provide Crude Distance Estimates through Ergonomic Knowns.
+### At a glance...
+ The SEER-V2 is an Assistive Navigation API aiming to provide Spatial Perception through Computer Vision to Aid Autonomous Systems and the Visually Impaired for Day to Day Navigation.  Through Monocular Depth Estimation, Object Detection and Object Pose Estimation, The SEER-V2 aims to Provide Crude Distance Estimates through Ergonomic Knowns.
 
 ### The Integration of the Integral Novel Monocular Depth Estimation Solution: 
-Spatial Recognition Provides the Visually Impaired and Autonomous Systems the Ability to Recognize Obstacles in their day to day interactions. Depth Maps are not new, although recently, the recent release of MiDas has provided a novel solution to generate Depth Maps. In the past, Stereo-Vision, Lidar solutions were the primary technique 
+Spatial Recognition Provides the Visually Impaired and Autonomous Systems the Ability to Recognize Obstacles in their day to day interactions. Depth Maps are not new, although recently, the recent release of MiDas has provided a novel solution to generate Depth Maps. In the past, Stereo-Vision, Lidar solutions were the primary technique to generate Depth Maps although MiDas relieves the community with a cost effective solution in Monocular Depth Estimation. Through Neural Networks,  
 
 ### The Object Detection Contribution :
 
@@ -49,4 +49,4 @@ Spatial Recognition Provides the Visually Impaired and Autonomous Systems the Ab
 
 1.  Using the command prompt terminal change the directory cd "~/DepthEstimator/src/"
 2.  Configure Project first using "config.py" found in the config folder
-3.  run the script "server-main.py" with the command "python server-main.py"
+3.  Run the script "server-main.py" with the command "python server-main.py"
