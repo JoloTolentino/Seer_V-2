@@ -16,7 +16,7 @@ import os
 
 
 class AngleRotation:
-    def __init__(self,ObjectRefference):
+    def __init__(self,ObjectRefference,stream):
         CFG_File = open(str(os.path.dirname(os.getcwd())+'\config\config.yaml'))
         Parsed_CFG = yaml.load(CFG_File,Loader=yaml.FullLoader)[0]
 
@@ -27,12 +27,20 @@ class AngleRotation:
         if self.Target_Object not in self.Known_Objects:
             return print('Pls, use a different object')
 
-        print('Estimating Angle....')
-
+        
+        #preloading drawing and predictive helper functions provided by the Mediapipe Team
         self.drawing = mp.solutions.drawing_utils
         self.objectron = mp.solutions.objectron
 
-    
+        print("Computing Camera Intrinsics")
+        self.Focal_Length = Parsed_CFG['Focal Length'] # Focal Length in Word Units
+        self.Center_X, self.Center_Y  = stream.shape[0]/2, stream.shape[1]/2 # centerpixels of the stream 
+
+
+
+
+        print("Computing Camera Extrinsics")
+        print('Estimating Angle....')
     def Median_Filter(self):
         pass
     
