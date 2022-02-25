@@ -68,13 +68,13 @@ class AngleRotation:
 
     def Pitch(self): #rotation about the y axis
         self.Yaw()
-        self.pitch = math.atan2(-1*self.Rotation_Matrix[2][0],self.Rotation_Matrix[0][0]) if self.yaw!=0 else  math.atan2(-1*self.Rotation_Matrix[2][0],self.Rotation_Matrix[1][0])
+        self.pitch = math.atan2(-1*self.Rotation_Matrix[2][0],self.Rotation_Matrix[0][0])*(180/math.pi) if self.yaw!=0 else  math.atan2(-1*self.Rotation_Matrix[2][0],self.Rotation_Matrix[1][0]) * (180/math.pi)
         print(self.pitch)
     def Yaw(self): #rotation about the z axis
-        self.yaw  = math.atan2(self.Rotation_Matrix[1][0],self.Rotation_Matrix[0][0]) 
+        self.yaw  = math.atan2(self.Rotation_Matrix[1][0],self.Rotation_Matrix[0][0])* (180/math.pi)
         print(self.yaw)
     def Roll(self): # rotation about the x axis
-        self.roll = math.atan2(self.Rotation_Matrix[2][1],self.Rotation_Matrix[2][2]) 
+        self.roll = math.atan2(self.Rotation_Matrix[2][1],self.Rotation_Matrix[2][2]) *(180/math.pi)
         print(self.roll)
 
 
