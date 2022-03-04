@@ -35,6 +35,7 @@ class AngleRotation:
         print("Computing Camera Intrinsics")
         self.Focal_Length = Parsed_CFG['Focal Length'] # Focal Length in Word Units
         self.Center_X, self.Center_Y  = stream.shape[0]/2, stream.shape[1]/2 # centerpixels of the stream 
+        
 
 
 
